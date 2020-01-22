@@ -27,12 +27,23 @@ For more details on how to run, see [DBG](https://github.com/faldupriyank/dbg).
 ## Simulator
 ```
 export DBG_ROOT='directory where this repo is cloned'
-cd ${DBG_ROOT}/trace-based-simulator
+cd ${DBG_ROOT}/trace-based-simulators
 make clean; make POLICY=grasp;
 ```
 
+# Sample Results
+Miss-rate for various cache management techniques for five graph applications processing the web-Google dataset using the traces provided in the ${DBG_ROOT}/datasets directory. Datasets are reorderd using DBG. Simulation assumes 16-way associative 1MB cache.
+
+| Miss-rate(%) |  LRU |  PIN | GRASP | Belady |
+|--------------|:----:|:----:|:-----:|:------:|
+| BC           | 60.2 | 62.4 |  36.5 |  33.3  |
+| SSSP         | 92.1 | 91.3 |  85.7 |  61.3  |
+| PR           | 87.9 | 75.7 |  64.7 |  56.5  |
+| PRD          | 87.9 | 75.7 |  64.7 |  56.5  |
+| Radii        | 84.2 | 72.4 |  62.7 |  51.0  |
+
 # License and copyright of the code used from external repositories
-The repo also contains code from multiple other repositories (e.g., [Ligra](https://github.com/jshun/ligra), [Graph-Reordering-IISWC18](https://github.com/CMUAbstract/Graph-Reordering-IISWC18), [GAP](https://github.com/sbeamer/gapbs)), [SNIPER](http://snipersim.org), [DBG](https://github.com/faldupriyank/dbg) and the original copyright and license constraints apply to their code.
+The repo also contains code from multiple other repositories (e.g., [Ligra](https://github.com/jshun/ligra), [Graph-Reordering-IISWC18](https://github.com/CMUAbstract/Graph-Reordering-IISWC18), [GAP](https://github.com/sbeamer/gapbs), [SNIPER](http://snipersim.org), [DBG](https://github.com/faldupriyank/dbg)) and the original copyright and license constraints apply to their code.
 
 # References
 **Please cite the following if you use the source code from this repository in your research.**
