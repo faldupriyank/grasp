@@ -5,14 +5,14 @@ This repo contains two parts: (1) Benchmarks and (2) Simulator.
 
 ## Benchmarks
 This repo implements a simple data structure optimization to improve cache efficiency for three Ligra applications -- PageRank, PageRankDelta and BellmanFord.
-To make this repo standalone, it retains a large chunk of the code from the original Ligra framework along with changes from Balaji et al. [3] and Faldu et al. [2]. For detailed information on the Ligra framework, please consult their original [repository](https://github.com/jshun/ligra). To know how to apply vertex reordering to improve cache efficiency, please consult the repository for [DBG](https://github.com/faldupriyank/dbg).
+To make this repo standalone, it retains a large chunk of the code from the original Ligra framework along with changes from Balaji et al. [IISWC'18] and Faldu et al. [2]. For detailed information on the Ligra framework, please consult their original [repository](https://github.com/jshun/ligra). To know how to apply vertex reordering to improve cache efficiency, please consult the repository for [DBG](https://github.com/faldupriyank/dbg).
 
 Specifically, we merge two arrays to improve spatial locality for the above mentioned applications. Files with Opt suffix contains our optimized version of the applications.
 
 ## Simulator
 This repo contains a simple trace-based simulation infrastructure contianing four cache management techniques -- LRU, Belady, PIN and Grasp. The simulator expects a file containing a header and a trace of L2 miss addresses as specified in read_file() of cache.h. Simulator is very simple, and assumes that all addresses are memory read. Simulator provides a first order effect of various policies on cache efficiency. However, it may not provide accurate results for write-dominated applications. 
 
-Finally, note that in the paper [1], we used the Sniper simulator. We included the Sniper APIs used to instrument applications to pass the region bounds to the cache microarchitecture in the Ligra source code. Look for code under the macro _SNIPER_.
+Finally, note that in the paper [1], we used the Sniper simulator. We included the Sniper APIs used to instrument applications to pass the region bounds to the cache microarchitecture in the Ligra source code. Look for code under the macro \_SNIPER\_.
 
 # How to build
 
@@ -32,6 +32,24 @@ make clean; make POLICY=grasp;
 ```
 
 # Sample Results
+
+## Benchmarks
+Normalized application runtime (lower is better) after data-structure optimization for above mentioned three applications when processing various datasets. The evaluation is done on a dual-socket server with two Broadwell based Intel Xeon CPU E5-2630 exposing total of 40 hardware threads.
+
+| Normalized Runtime | BellmanFordOpt-iters | PageRankDeltaOpt | PageRankOpt |
+|--------------------|:--------------------:|:----------------:|:-----------:|
+| dbpedia-link       |         0.98         |       0.71       |     0.77    |
+| friendster         |         1.02         |       0.88       |     0.66    |
+| pld-arc            |         0.92         |       0.94       |     0.71    |
+| sd-arc             |         0.94         |       0.93       |     0.70    |
+| soc-LiveJournal1   |         0.97         |       0.81       |     0.76    |
+| twitter_mpi        |         0.99         |       0.65       |     0.67    |
+| twitter_rv         |         0.95         |       0.69       |     0.69    |
+| web-Google         |         0.92         |       0.78       |     0.79    |
+
+
+
+## Simulator
 Miss-rate for various cache management techniques for five graph applications processing the web-Google dataset using the traces provided in the ${DBG_ROOT}/datasets directory. Datasets are reorderd using DBG. Simulation assumes 16-way associative 1MB cache.
 
 | Miss-rate(%) |  LRU |  PIN | GRASP | Belady |
@@ -67,5 +85,3 @@ The repo also contains code from multiple other repositories (e.g., [Ligra](http
 [1] P. Faldu and J. Diamond and B. Grot, "Domain-Specialized Cache Management for Graph Analytics", in *Proceedings of the International Symposium on High-Performance Computer Architecture (HPCA)*, February 2020.
 
 [2] P. Faldu and J. Diamond and B. Grot, "A Closer Look at Lightweight Graph Reordering," in *Proceedings of the International Symposium on Workload Characterization (IISWC)*, November 2019.
-
-[3] V. Balaji and B. Lucia, "When is Graph Reordering an Optimization? Studying the Effect of Lightweight Graph Reordering Across Applications and Input Graphs," in *Proceedings of the International Symposium on Workload Characterization (IISWC)*, September 2018.
