@@ -137,7 +137,7 @@ run-PageRankDeltaOrig: # PUSH (IN-DEGREE)
 	${NUMA} ${TASKSET} ${DBG_ROOT}/apps/PageRankDeltaOrig -reordering_algo ${REORDERING_ALGO} -maxiters ${MAXITERS} -is_dense_write 1 ${COMMON} ${GPATH}/${DATASET}${CVGR}
 
 run-PageRankDeltaOpt: # PUSH (IN-DEGREE)
-	${NUMA} ${TASKSET} ${DBG_ROOT}/apps/PageRankDeltaOpt -reordering_algo ${REORDERING_ALGO} -maxiters ${MAXITERS} -is_dense_write 1 ${COMMON} ${GPATH}/${DATASET}${CVGR}
+	${NUMA} ${TASKSET} ${DBG_ROOT}/apps/PageRankDeltaOpt -reordering_algo ${REORDERING_ALGO} -maxiters ${MAXITERS} ${COMMON} ${GPATH}/${DATASET}${CVGR}
 
 run-Radii: # PULL-PUSH (OUT-DEGREE)
 	${NUMA} ${TASKSET} ${DBG_ROOT}/apps/Radii -reordering_algo ${REORDERING_ALGO} ${COMMON} ${GPATH}/${DATASET}${CVGR}

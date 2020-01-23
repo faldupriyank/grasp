@@ -22,7 +22,7 @@ for DATASET in web-Google; do
         echo "app: ${app}"
         DEG="out"
         DEGREE_USED_FOR_REORDERING=0 #Out-Degree
-        if [ "${app}" == "PageRankDelta" ] || [ "${app}" == "BellmanFord" ] || [ "${app}" == "BellmanFord-iters" ]; then
+        if [ "${app}" == "PageRankDelta" ] || [ "${app}" == "BellmanFordOrig" ] || [ "${app}" == "BellmanFordOrig-iters" ] || [ "${app}" == "BellmanFordOpt" ] || [ "${app}" == "BellmanFordOpt-iters" ]; then
             DEGREE_USED_FOR_REORDERING=1 #In-Degree
             DEG="in"
         fi
